@@ -5,4 +5,9 @@ FactoryGirl.define do
     password "foobar1"
     password_confirmation "foobar1"
   end
+
+  factory :micropost do
+    content "Lorem ipsum"
+    user
+  end
 end
