@@ -17,20 +17,6 @@
 //= require textarea-сounter
 //= require_tree .
 
-<<<<<<< HEAD
-
-$(document).ready(function(){  
-    var counter = {  
-    'maxCharacterSize': 140,  
-    'originalStyle': 'originalDisplayInfo',  
-    'warningStyle': 'warningDisplayInfo',  
-    'warningNumber': 30,  
-    'displayFormat': '#left'  
-	};  
-	$('#message-area').textareaCount(counter);  
-
-});  
-=======
 $(document).ready(function(){
 	var counter = {
 		'maxCharacterSize': 140,
@@ -41,4 +27,3 @@ $(document).ready(function(){
 	};
 	$('#word-counter').textareaCount(counter);
 });
->>>>>>> following-users
