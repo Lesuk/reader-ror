@@ -15,3 +15,14 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function(){
+	var counter = {
+		'maxCharacterSize': 140,
+		'originalStyle': 'originalDisplayInfo',
+		'warningStyle': 'warningDisplayInfo',
+		'warningNumber': 30,
+		'displayFormat': '#left'
+	};
+	$('#word-counter').textareaCount(counter);
+});
