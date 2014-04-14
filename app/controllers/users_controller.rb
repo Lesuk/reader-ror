@@ -9,8 +9,10 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@user = User.find(params[:id])
+		#@user = User.find(params[:id])
+		@user = User.find_by_login(params[:id])
 		@microposts = @user.microposts.paginate(page: params[:page])
+		@title = @user.name
 	end
 
 	def new
@@ -41,21 +43,21 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
-		User.find(params[:id]).destroy
+		User.find_by_login(params[:id]).destroy
 		flash[:success] = "User deleted"
 		redirect_to users_url
 	end
 
 	def following
 		@title = "Following"
-		@user = User.find(params[:id])
+		@user = User.find_by_login(params[:id])
 		@users = @user.followed_users.paginate(page: params[:page])
 		render 'show_follow'
 	end
 
 	def followers
 		@title = "Followers"
-		@user = User.find(params[:id])
+		@user = User.find_by_login(params[:id])
 		@users = @user.followers.paginate(page: params[:page])
 		render 'show_follow'
 	end
@@ -63,11 +65,11 @@ class UsersController < ApplicationController
 	private
 
 		def user_params
-			params.require(:user).permit(:name, :email, :password, :password_confirmation)
+			params.require(:user).permit(:name, :login, :email, :password, :password_confirmation)
 		end
 
 		def correct_user
-	      @user = User.find(params[:id])
+	      @user = User.find_by_login(params[:id])
 	      redirect_to(root_url) unless current_user?(@user)
 	    end
 
