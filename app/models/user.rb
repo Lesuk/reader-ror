@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
 	end
 
 	def to_param
-		self.login
+		login
 	end
 
   	private
