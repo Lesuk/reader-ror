@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "lesuk93@yahoo.com"
+  default from: "ua-reader@herokuapp.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -8,6 +8,11 @@ class UserMailer < ActionMailer::Base
   #
   def password_reset(user)
     @user = user
-    mail to: user.email, subject: "Password reset"
+    mail(to: user.email, subject: "Password reset")
+  end
+
+  def signup_confirmation(user)
+    @user = user
+    mail(to: user.email, subject: "Confirm your email address")
   end
 end
