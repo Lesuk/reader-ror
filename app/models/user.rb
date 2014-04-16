@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 	validates :login, presence: true, length: {maximum: 15}, uniqueness: {case_sensitive: false}, format: { with: login_regex }
 
 	has_secure_password
-	validates :password, length: {minimum: 6}
+	validates :password, length: {minimum: 6}, unless: :password_is_not_being_updated?
 
 	def User.new_remember_token
 	  SecureRandom.urlsafe_base64
@@ -41,6 +41,17 @@ class User < ActiveRecord::Base
 
 	def unfollow!(other_user)
 		self.relationships.find_by(followed_id: other_user.id).destroy!
+	end
+
+	def send_password_reset
+		self.password_reset_token = User.hash(User.new_remember_token)
+		self.password_reset_sent_at = Time.zone.now
+		save!
+		UserMailer.password_reset(self).deliver
+	end
+
+	def password_is_not_being_updated?
+		self.id && self.password.blank?
 	end
 
 	def to_param
