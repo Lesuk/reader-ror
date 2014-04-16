@@ -1,8 +1,16 @@
 <% provide(:title, 'All users') %>
 <h1>All users</h1>
-
-<%= will_paginate %>
-<ul class="users">
-    <%= render @users %>
-</ul>
-<%= will_paginate %>
+<div class="row">
+	<aside class="span4">
+		<%= form_tag users_path, method: 'get' do %>
+			<%= text_field_tag :search, params[:search] %>
+			<%= submit_tag "Search", class: "btn btn-sm", name: nil %>
+		<% end %>
+	</aside>
+	<div class="span8">
+		<ul class="users">
+			<%= render @users %>
+		</ul>
+		<%= will_paginate %>
+	</div>
+</div>

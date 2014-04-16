@@ -54,6 +54,14 @@ class User < ActiveRecord::Base
 		self.id && self.password.blank?
 	end
 
+	def self.search(search)
+		if search
+			where('name LIKE ?', "%#{search}%")
+		else
+			scoped
+		end
+	end
+
 	def to_param
 		login
 	end
