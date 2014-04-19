@@ -1,6 +1,6 @@
 <h1><%= @article.title %></h1>
 
-<%= @article.content %>
+<%= raw @article.content %>
 
 <p>
   <%= link_to "Edit Article", edit_article_path(@article) %> |

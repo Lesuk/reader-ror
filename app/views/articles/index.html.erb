@@ -12,7 +12,7 @@
 	<div id="articles" class="span8">
 		<% @articles.each do |article| %>
 			<h2><%= link_to article.title, article %></h2>
-			<%= article.content %>
+			<%= article.content.html_safe %>
 			<p>Categories: <%= raw article.categories.map(&:name).map{|t| link_to t, category_path(t) }.join(', ') %></p>
 			<p>Author: <%= link_to article.user.name, article.user %> |
 			<%= link_to "All by " + article.user.name, author_path(article.user.login) %></p>

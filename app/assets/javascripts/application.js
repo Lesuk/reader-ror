@@ -15,6 +15,8 @@
 //= require bootstrap
 //= require turbolinks
 //= require textarea-сounter
+//= require ckeditor/init
+//= require ckeditor/ckeditor
 //= require_tree .
 
 $(document).ready(function(){
