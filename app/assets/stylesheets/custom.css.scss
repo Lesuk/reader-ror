@@ -204,6 +204,9 @@ input {
   @extend .error;
 }
 
+.article-field textarea{
+  height: 300px;
+}
 
 
 /* Users index */
@@ -247,4 +250,10 @@ aside {
     height: 100px;
     margin-bottom: 5px;
   }
+}
+
+#articles h2{
+  text-align: left;
+  margin-bottom: 10px;
+  font-weight: bold;
 }

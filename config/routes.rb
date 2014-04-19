@@ -8,6 +8,7 @@ ReaderRor::Application.routes.draw do
   resources :microposts,    only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :password_resets
+  resources :articles
   root 'static_pages#home'
 
   match '/signup', to: 'users#new', via: 'get'
@@ -17,6 +18,9 @@ ReaderRor::Application.routes.draw do
   match '/help', to: 'static_pages#help', via: 'get'
   match '/about', to: 'static_pages#about', via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
+
+  get 'categories/:category', to: 'articles#index', as: :category
+  get 'user/articles/:author', to: 'articles#index', as: :author
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
