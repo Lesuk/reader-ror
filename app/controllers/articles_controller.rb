@@ -24,6 +24,9 @@ class ArticlesController < ApplicationController
 		@article.user_id = current_user.id
 		if @article.save
 			flash[:success] = "New article has been created."
+			micro_post_content = view_context.link_to(@article.title, @article)
+			micropost = current_user.microposts.build(content: micro_post_content)
+			micropost.save
 			redirect_to @article
 		else
 			render 'new'
