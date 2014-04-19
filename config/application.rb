@@ -28,8 +28,9 @@ module ReaderRor
       end if File.exists?(env_file)
     end
 
-    config.action_mailer.default_url_options = { host: 'lesuk-nitrous-rails-102615.euw1-2.nitrousbox.com' }
+    config.action_mailer.default_url_options = { host: 'ua-reader.herokuapp.com' }
 
+    config.assets.precompile += Ckeditor.assets
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
   end
 end
