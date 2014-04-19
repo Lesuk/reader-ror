@@ -15,6 +15,7 @@
 //= require bootstrap
 //= require turbolinks
 //= require textarea-сounter
+//= require ckeditor/override
 //= require ckeditor/init
 //= require ckeditor/ckeditor
 //= require_tree .
