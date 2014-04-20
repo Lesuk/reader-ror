@@ -4,8 +4,11 @@ class ArticlesController < ApplicationController
 	def index
 		if params[:category]
 			@articles = Article.categorized_with(params[:category])
+			@name = ""
 		elsif params[:author]
-			@articles = Article.users_articles(params[:author])
+			#@articles = Article.users_articles(params[:author])
+			@articles = Article.by_author(params[:author])
+			@name = "by " + User.find_by_id(params[:author]).name
 		else			
 			@articles = Article.all
 		end

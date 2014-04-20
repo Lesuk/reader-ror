@@ -1,4 +1,4 @@
-<h1>Articles</h1>
+<h1>Articles <%= @name %></h1>
 
 <div class="row">
 	<div class="span4">
@@ -15,7 +15,8 @@
 			<%= article.content.html_safe %>
 			<p>Categories: <%= raw article.categories.map(&:name).map{|t| link_to t, category_path(t) }.join(', ') %></p>
 			<p>Author: <%= link_to article.user.name, article.user %> |
-			<%= link_to "All by " + article.user.name, author_path(article.user.login) %></p>
+			<%= link_to "All by " + article.user.name, articles_path + "?author=" + article.user.id.to_s %></p>
+
 			<% if signed_in? %>
 			<p><%= link_to "Edit", edit_article_path(article)  %> | 
 			<%= link_to 'Delete', article, data: {confirm: 'Are you sure?'}, method: :delete %></p>

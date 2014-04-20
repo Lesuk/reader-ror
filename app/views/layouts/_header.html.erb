@@ -4,18 +4,18 @@
       <%= link_to "ua-reader", root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
+          
           <li><%= link_to "Home", root_path %></li>
           <% if signed_in? %>
+            <li><%= link_to "Hi, " + current_user.name, current_user %></li>
             <li><%= link_to "Users", users_path %></li>
-            
-
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Articles <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
                 <li><%= link_to "All articles", articles_path %></li>
-                <li><%= link_to "My articles", author_path(current_user) %></li>
+                <li><%= link_to "My articles", articles_path + "?author=" + current_user.id.to_s %></li>
                 <li><%= link_to "Add new", new_article_path %></li>
                 <li class="divider"></li>
               </ul>
@@ -34,6 +34,7 @@
                 </li>
               </ul>
             </li>
+            <li><button class="btn btn-primary" data-toggle="modal" data-target="#microModal"><i class="icon-pencil icon-white"></i></a></li>
           <% else %>
             <li><%= link_to "Sign in", signin_path %></li>
           <% end %>
@@ -42,3 +43,14 @@
     </div>
   </div>
 </header>
+
+<div id="microModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Create a micropost</h3>
+  </div>
+
+  <div class="modal-body">
+    <%= render 'shared/micropost_form' %>
+  </div>
+</div>

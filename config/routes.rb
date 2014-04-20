@@ -21,7 +21,6 @@ ReaderRor::Application.routes.draw do
   match '/contact', to: 'static_pages#contact', via: 'get'
 
   get 'categories/:category', to: 'articles#index', as: :category
-  get 'user/articles/:author', to: 'articles#index', as: :author
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -208,6 +208,10 @@ input {
   height: 300px;
 }
 
+.modal-body textarea{
+  height: 90px;
+}
+
 
 /* Users index */
 
@@ -227,7 +231,7 @@ input {
 
 /* microposts */
 
-.microposts {
+#microposts {
   list-style: none;
   margin: 10px 0 0 0;
 

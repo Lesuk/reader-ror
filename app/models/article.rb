@@ -4,6 +4,7 @@ class Article < ActiveRecord::Base
 	belongs_to :user
 
 	default_scope -> {order('created_at DESC')}
+	scope :by_author, -> (user_id) { where user_id: user_id }
 
 	validates :title, :content, presence: true
 

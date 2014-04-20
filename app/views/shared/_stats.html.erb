@@ -12,7 +12,7 @@
 			</strong>
 			followers
 		</a>
-		<a href="<%= author_path(@user.login) %>">
+		<a href="<%= articles_path + "?author=" + @user.id.to_s %>">
 			<strong id="articles" class="stat">
 				<%= @user.articles.count %>
 			</strong>
