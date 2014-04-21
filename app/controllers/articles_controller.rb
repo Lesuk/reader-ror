@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def show
-		@article = Article.find(params[:id])
+		@article = Article.friendly.find(params[:id])
 	end
 
 	def new
@@ -37,11 +37,11 @@ class ArticlesController < ApplicationController
 	end
 
 	def edit
-		@article = Article.find(params[:id])
+		@article = Article.friendly.find(params[:id])
 	end
 
 	def update
-		@article = Article.find(params[:id])
+		@article = Article.friendly.find(params[:id])
 		if @article.update_attributes(article_params)
 			redirect_to @article
 			flash[:success] = "Article updated"
@@ -51,7 +51,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def destroy
-		Article.find(params[:id]).destroy
+		Article.friendly.find(params[:id]).destroy
 		flash[:success] = "Article deleted"
 		redirect_to articles_url
 	end

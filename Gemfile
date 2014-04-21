@@ -29,6 +29,8 @@ gem 'jbuilder', '1.0.2'
 gem 'ckeditor'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'friendly_id', '~> 5.0.0'
+gem 'babosa'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

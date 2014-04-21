@@ -1,4 +1,7 @@
+require "babosa"
 class Article < ActiveRecord::Base
+	extend FriendlyId
+  	friendly_id :title, use: :slugged
 	has_many :categorizes
 	has_many :categories, through: :categorizes
 	belongs_to :user
@@ -6,7 +9,7 @@ class Article < ActiveRecord::Base
 	default_scope -> {order('created_at DESC')}
 	scope :by_author, -> (user_id) { where user_id: user_id }
 
-	validates :title, :content, presence: true
+	validates :title, :content, :user_id, presence: true
 
 	def self.categorized_with(name)
 		Category.find_by_name!(name).articles
@@ -29,6 +32,10 @@ class Article < ActiveRecord::Base
 		self.categories = names.split(",").map do |n|
 			Category.where(name: n.strip).first_or_create!
 		end
+	end
+
+	def normalize_friendly_id(input)
+	    input.to_s.to_slug.normalize(transliterations: :ukrainian).to_s
 	end
 
 end
