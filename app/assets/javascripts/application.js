@@ -29,4 +29,5 @@ $(document).ready(function(){
 		'displayFormat': '#left'
 	};
 	$('#word-counter').textareaCount(counter);
+	$('#word-counter-2').textareaCount(counter);
 });

@@ -1,0 +1,9 @@
+<% if signed_in? && current_user %>
+<%= form_for(@micropost) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+	<div class="field">
+		<%= f.text_area :content, id: "word-counter-2", placeholder: "Compose new micropost..." %>
+	</div>
+	<%= f.submit "Post", class: "btn btn-large btn-primary" %>
+<% end %>
+<% end %>

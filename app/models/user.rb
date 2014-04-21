@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
 	has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
 	has_many :followers, through: :reverse_relationships, source: :follower
 	has_many :articles, dependent: :destroy
+	has_many :replies, foreign_key: "to_id", class_name: "Micropost"
 	before_save {self.email = email.downcase}
 	before_create :create_remember_token
-
 	validates :name, presence: true, length: {maximum: 30}
 
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -28,8 +28,8 @@ class User < ActiveRecord::Base
 	end
 
 	def feed
-		#Micropost.where("user_id = ?", id)
-		Micropost.from_users_followed_by(self)
+		#Micropost.from_users_followed_by(self)
+		Micropost.from_users_followed_by_including_replies(self)
 	end
 
 	def following?(other_user)
@@ -53,6 +53,10 @@ class User < ActiveRecord::Base
 
 	def password_is_not_being_updated?
 		self.id && self.password.blank?
+	end
+
+	def make_dog
+		"@#{login}"
 	end
 
 	def self.search(search)
