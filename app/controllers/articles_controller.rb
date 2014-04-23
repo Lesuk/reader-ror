@@ -1,10 +1,11 @@
 class ArticlesController < ApplicationController
 	before_action :signed_in_user, only: [:new, :create, :edit, :update, :destroy]
+	before_action :set_article, only: [:show]
 
 	def index
+		@name = ""
 		if params[:category]
 			@articles = Article.categorized_with(params[:category])
-			@name = ""
 		elsif params[:author]
 			#@articles = Article.users_articles(params[:author])
 			@articles = Article.by_author(params[:author])
@@ -15,7 +16,6 @@ class ArticlesController < ApplicationController
 	end
 
 	def show
-		@article = Article.friendly.find(params[:id])
 	end
 
 	def new
@@ -23,8 +23,8 @@ class ArticlesController < ApplicationController
 	end
 
 	def create
-		@article = Article.new(article_params)
-		@article.user_id = current_user.id
+		@article = current_user.articles.new(article_params)
+		#@article.user_id = current_user.id
 		if @article.save
 			flash[:success] = "New article has been created."
 			micro_post_content = view_context.link_to(@article.title, @article)
@@ -37,11 +37,11 @@ class ArticlesController < ApplicationController
 	end
 
 	def edit
-		@article = Article.friendly.find(params[:id])
+		@article = current_user.articles.friendly.find(params[:id])
 	end
 
 	def update
-		@article = Article.friendly.find(params[:id])
+		@article = current_user.articles.friendly.find(params[:id])
 		if @article.update_attributes(article_params)
 			redirect_to @article
 			flash[:success] = "Article updated"
@@ -51,13 +51,18 @@ class ArticlesController < ApplicationController
 	end
 
 	def destroy
-		Article.friendly.find(params[:id]).destroy
+		@article = current_user.articles.friendly.find(params[:id])
+		@article.destroy
 		flash[:success] = "Article deleted"
 		redirect_to articles_url
 	end
 
 
 	private
+
+		def set_article
+			@article = Article.friendly.find(params[:id])
+		end
 
 		def article_params
 			params.require(:article).permit(:title, :content, :publish_date, :category_list)

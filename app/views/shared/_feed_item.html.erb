@@ -4,8 +4,6 @@
 	<span class="content"><%= auto_link(feed_item.content, html: { target: '_blank' }) %></span>
 	<span class="timestamp">Posted <%= time_ago_in_words(feed_item.created_at) %> ago.</span>
 	<% if current_user?(feed_item.user) || current_user.admin? %>
-    <%= link_to "delete", feed_item, method: :delete,
-                                     #data: { confirm: "You sure?" },
-                                     title: feed_item.content %>
+    <%= link_to 'Delete', feed_item, confirm: 'Are you sure?', method: :delete, remote: true %>
   	<% end %>
 </li>

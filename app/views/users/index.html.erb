@@ -1,13 +1,15 @@
 <% provide(:title, 'All users') %>
 <h1>All users</h1>
 <div class="row">
-	<aside class="span4">
-		<%= form_tag users_path, method: 'get' do %>
-			<%= text_field_tag :search, params[:search] %>
-			<%= submit_tag "Search", class: "btn btn-sm", name: nil %>
-		<% end %>
-	</aside>
+	<%= render 'shared/sidebar' %>
+
 	<div class="span8">
+		<div class="navbar-inner">
+		<%= form_tag users_path, method: 'get', class: "navbar-search pull-left" do %>
+			<%= text_field_tag :search, params[:search], class: "search-query", placeholder: "Search user..." %>
+			<%#= submit_tag "Search", class: "btn btn-sm", name: nil %>
+		<% end %>
+		</div>
 		<ul class="users">
 			<%= render @users %>
 		</ul>

@@ -8,6 +8,7 @@
 
 <%= f.label :category_list, "Categories (separated by commas)" %>
 <%= f.text_field :category_list %>
-
+<div class="date-picker">
 <%= f.label :publish_date %>
-<%= f.date_field :publish_date %>
+<%= f.datetime_select :publish_date %>
+</div>

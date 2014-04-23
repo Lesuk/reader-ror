@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 	has_many :followers, through: :reverse_relationships, source: :follower
 	has_many :articles, dependent: :destroy
 	has_many :replies, foreign_key: "to_id", class_name: "Micropost"
+	has_many :annotations, through: :articles, source: :comments
 	before_save {self.email = email.downcase}
 	before_create :create_remember_token
 	validates :name, presence: true, length: {maximum: 30}
@@ -13,7 +14,7 @@ class User < ActiveRecord::Base
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
 	validates :email, presence: true, uniqueness: {case_sensitive: false}, format: { with: VALID_EMAIL_REGEX }
 
-	login_regex = /\A[a-z]\w*[a-z0-9]\z/i
+	login_regex = /[A-Za-z]+[A-Za-z0-9_]{3,15}/i
 	validates :login, presence: true, length: {maximum: 15}, uniqueness: {case_sensitive: false}, format: { with: login_regex }
 
 	has_secure_password

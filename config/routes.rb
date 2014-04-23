@@ -5,11 +5,13 @@ ReaderRor::Application.routes.draw do
       get :following, :followers
     end
   end
+  resources :articles do
+    resources :comments
+  end
   resources :sessions,      only: [:new, :create, :destroy]
   resources :microposts,    only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :password_resets
-  resources :articles
   root 'static_pages#home'
 
   match '/signup', to: 'users#new', via: 'get'

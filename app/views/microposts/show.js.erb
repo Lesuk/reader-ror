@@ -1,0 +1,2 @@
+$('#microposts').append("<%= escape_javascript(render('shared/feed_item', collection: @feed_items)) %>");
+$('#new_micropost')[0].reset();

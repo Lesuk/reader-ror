@@ -14,8 +14,12 @@
 		</a>
 		<a href="<%= articles_path + "?author=" + @user.id.to_s %>">
 			<strong id="articles" class="stat">
-				<%= @user.articles.count %>
+				<%= pluralize(@user.articles.count, "article") %>
 			</strong>
-			articles
+		</a>
+		<a href="<%= current_user %>">
+			<strong id="microposts" class="stat">
+				<%= pluralize(current_user.microposts.count, "micropost") %>
+			</strong>
 		</a>
 	</div>

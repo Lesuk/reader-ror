@@ -1,6 +1,5 @@
 <%= link_to gravatar_for(current_user, size: 52), current_user %>
 
-<h1><%= current_user.name %></h1>
-<span><%= link_to 'view my profile', current_user %></span>
-<span><%= pluralize(current_user.microposts.count, "micropost") %></span>
-<span><%= pluralize(current_user.articles.count, "article") %></span>
+<p class="profile-name"><a><%= current_user.name %></a> <%= current_user.make_dog %></p>
+<span><%#= link_to pluralize(current_user.microposts.count, "micropost"), current_user %></span>
+<span><%#= link_to pluralize(current_user.articles.count, "article"), articles_path + "?author=" + current_user.id.to_s %></span>

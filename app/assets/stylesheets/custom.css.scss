@@ -150,6 +150,7 @@ aside {
 
 .stats {
   overflow: auto;
+  margin: 1px 0 15px;
   a {
     float: left;
     padding: 0 10px;
@@ -165,7 +166,7 @@ aside {
     }
   }
   strong {
-    display: block;
+    /*display: block;*/
   }
 }
 
@@ -176,7 +177,14 @@ aside {
     margin: 1px 1px;
   }
 }
-
+.profile-name{
+  line-height: 1.5em;
+  color: #9C9C9C;
+  a{
+    font-size: 18px;
+    display: block;
+  }
+}
 
 /* forms */
 
@@ -212,12 +220,25 @@ input {
   height: 90px;
 }
 
+.date-picker select{
+  width: 120px;
+}
+
+#new_comment input,
+#new_comment textarea{
+  width: 400px;
+}
+#new_comment input[type='submit']{
+  display: block;
+  width: inherit;
+}
 
 /* Users index */
 
 .users {
   list-style: none;
   margin: 0;
+  clear: both;
   li {
     overflow: auto;
     padding: 10px 0;
