@@ -1,7 +1,8 @@
 class Comment < ActiveRecord::Base
 	belongs_to :article
+	belongs_to :user
 
-	validates :name, :email, presence: true
+	validates :body, presence: true
 	#validate :article_should_be_published
 
 	after_create # :make_micropost - Make comment as micropost and show it to author page

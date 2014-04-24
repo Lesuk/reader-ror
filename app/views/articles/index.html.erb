@@ -13,10 +13,9 @@
 		<% @articles.each do |article| %>
 			<h2><%= link_to article.title, article %></h2>
 			<%= truncate(article.content.html_safe, length: 100, separator: ' ', escape: false) %>
-			<p>Categories: <%= raw article.categories.map(&:name).map{|t| link_to t, category_path(t) }.join(', ') %></p>
+			<p>Categories: <%= raw article.categories.map(&:name).map{|t| link_to t, category_path(t) }.join(', ') %>, Comments: <%= article.comments.count %></p>
 			<p>Author: <%= link_to article.user.name, article.user %> |
 			<%= link_to "All by " + article.user.name, articles_path + "?author=" + article.user.id.to_s %></p>
-
 			<% if signed_in? && article.owned_by?(current_user) %>
 			<p><%= link_to "Edit", edit_article_path(article)  %> | 
 			<%= link_to 'Delete', article, data: {confirm: 'Are you sure?'}, method: :delete %></p>

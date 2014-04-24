@@ -1,8 +1,9 @@
 class CommentsController < ApplicationController
-	before_action :load_article, except: :destroy
+	before_action :load_article#, except: :destroy
 
 	def create
 		@comment = @article.comments.new(comment_params)
+		@comment.user_id = current_user.id
 		if @comment.save
 			respond_to do |format|
 				format.html { redirect_to @article, flash[:success] = "Comment added" }
@@ -17,7 +18,7 @@ class CommentsController < ApplicationController
 	end
 
 	def destroy
-		@article = current_user.articles.friendly.find(params[:article_id])
+		#@article = current_user.articles.friendly.find(params[:article_id])
 		@comment = @article.comments.find(params[:id])
 		@comment.destroy
 		respond_to do |format|
@@ -34,7 +35,7 @@ class CommentsController < ApplicationController
 		end
 
 		def comment_params
-			params.require(:comment).permit(:name, :email, :body)
+			params.require(:comment).permit(:body)
 		end
 
 end
