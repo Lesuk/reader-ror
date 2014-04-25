@@ -8,7 +8,7 @@ ReaderRor::Application.routes.draw do
   resources :articles do
     resources :comments
   end
-  resources :microposts,    only: [:create, :destroy] do
+  resources :microposts, only: [:create, :destroy] do
     resources :comments
   end
   resources :sessions,      only: [:new, :create, :destroy]

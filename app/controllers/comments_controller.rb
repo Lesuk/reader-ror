@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-	#before_action :load_article#, except: :destroy
 	before_action :load_commentable
 
 	def new
