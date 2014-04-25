@@ -16,6 +16,9 @@ class ArticlesController < ApplicationController
 	end
 
 	def show
+		@commentable = @article
+		@comments = @commentable.comments
+		#@comment = Comment.new
 	end
 
 	def new

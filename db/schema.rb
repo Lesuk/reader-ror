@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424195531) do
+ActiveRecord::Schema.define(version: 20140425121708) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -58,12 +58,15 @@ ActiveRecord::Schema.define(version: 20140424195531) do
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type"
 
   create_table "comments", force: true do |t|
-    t.integer  "article_id"
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
   end
+
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false

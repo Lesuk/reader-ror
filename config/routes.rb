@@ -8,8 +8,10 @@ ReaderRor::Application.routes.draw do
   resources :articles do
     resources :comments
   end
+  resources :microposts,    only: [:create, :destroy] do
+    resources :comments
+  end
   resources :sessions,      only: [:new, :create, :destroy]
-  resources :microposts,    only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :password_resets
   root 'static_pages#home'

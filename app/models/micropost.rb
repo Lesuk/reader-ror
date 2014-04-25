@@ -3,7 +3,7 @@ class Micropost < ActiveRecord::Base
 	default_scope -> {order('created_at DESC')}
 	validates :user_id, presence: true
 	validates :content, presence: true, length: {maximum: 140}
-
+	has_many :comments, as: :commentable
 	has_many :replies, foreign_key: "to_id", class_name: "Micropost"
 	belongs_to :to, class_name: "User"
 	before_save :check_in_reply_to_scan

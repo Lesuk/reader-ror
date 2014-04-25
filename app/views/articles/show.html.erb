@@ -10,7 +10,8 @@
 
 <h3>Comments</h3>
 <div id="comments">
-	<%= render @article.comments %>
+	<%= render @comments %>
 </div>
-<%= link_to "New comment", new_article_comment_path(@article, format: :js), remote: true, id: "new_comment_link" %>
+<%= link_to "New comment", polymorphic_path([:new, @commentable, :comment], format: :js), remote: true, id: "new_comment_link" %>
+<% #new_article_comment_path(@article, format: :js)  %>
 <%#= render file: 'comments/new' %>

@@ -4,7 +4,7 @@ class Article < ActiveRecord::Base
   	friendly_id :title, use: :slugged
 	has_many :categorizes
 	has_many :categories, through: :categorizes
-	has_many :comments
+	has_many :comments, as: :commentable
 	belongs_to :user
 
 	default_scope -> {order('created_at DESC')}

@@ -3,7 +3,7 @@
 	<%= comment.user.name %> said:
 	<% if current_user?(comment.user) || current_user.id == @article.user_id %>
 	<span class="actions">
-		<%= link_to 'Delete', [@article, comment], confirm: 'Are you sure?', method: :delete, remote: true %>
+		<%= link_to 'Delete', [@commentable, comment], confirm: 'Are you sure?', method: :delete, remote: true %>
 	</span>
 	<% end %>
 	</h3>
