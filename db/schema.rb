@@ -11,16 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140425121708) do
+ActiveRecord::Schema.define(version: 20140427153401) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
     t.text     "content"
-    t.date     "publish_date"
+    t.datetime "publish_date"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+    t.string   "status",       default: "published"
   end
 
   add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true
@@ -67,6 +68,7 @@ ActiveRecord::Schema.define(version: 20140425121708) do
   end
 
   add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -89,6 +91,7 @@ ActiveRecord::Schema.define(version: 20140425121708) do
     t.integer  "to_id"
   end
 
+  add_index "microposts", ["to_id"], name: "index_microposts_on_to_id"
   add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
 
   create_table "relationships", force: true do |t|
@@ -101,6 +104,18 @@ ActiveRecord::Schema.define(version: 20140425121708) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id"
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
+
+  create_table "tasks", force: true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.string   "note"
+    t.boolean  "completed",  default: false
+    t.integer  "priority",   default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -118,5 +133,21 @@ ActiveRecord::Schema.define(version: 20140425121708) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["login"], name: "index_users_on_login", unique: true
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+
+  create_table "videos", force: true do |t|
+    t.integer  "user_id"
+    t.string   "link"
+    t.string   "title"
+    t.string   "author"
+    t.string   "duration"
+    t.integer  "likes"
+    t.integer  "dislikes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "uid"
+  end
+
+  add_index "videos", ["uid"], name: "index_videos_on_uid"
+  add_index "videos", ["user_id"], name: "index_videos_on_user_id"
 
 end

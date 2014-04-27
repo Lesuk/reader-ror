@@ -7,6 +7,7 @@ gem 'sprockets', '2.11.0'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
+#gem 'json', '~> 1.8.1' // current - 1.7.7 fo youtube_it
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'
@@ -32,6 +33,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'friendly_id', '~> 5.0.0'
 gem 'babosa'
+gem 'youtube_it', '~> 2.4.0'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

@@ -32,5 +32,9 @@ module ReaderRor
 
     config.assets.precompile += Ckeditor.assets
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
+
+    #config.time_zone = 'Ukraine'
+    #config.active_record.default_timezone = 'Ukraine'
+
   end
 end

@@ -1,13 +1,7 @@
-<h1>Articles <%= @name %></h1>
+<h1>Articles <%= @name %> (<%= Article.count %>)</h1>
 
 <div class="row">
-	<div class="span4">
-		<ol id="cat-list">
-		<% Category.all.each do |cat| %>
-			<li><%= link_to cat.name, category_path(cat.name) %></li>
-		<% end %>
-		</ol>
-	</div>
+	<%= render 'shared/sidebar' %>
 
 	<div id="articles" class="span8">
 		<% @articles.each do |article| %>

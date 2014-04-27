@@ -18,6 +18,8 @@
 //= require ckeditor/override
 //= require ckeditor/init
 //= require ckeditor/ckeditor
+//= require jquery.bind_with_delay
+//= require yt_player
 //= require_tree .
 
 $(document).ready(function(){

@@ -7,9 +7,9 @@ class Article < ActiveRecord::Base
 	has_many :comments, as: :commentable
 	belongs_to :user
 
-	default_scope -> {order('created_at DESC')}
+	default_scope -> {order('publish_date DESC')}
 	scope :by_author, -> (user_id) { where user_id: user_id }
-	scope :published, lambda { where("articles.published_at IS NOT NULL") } # I don't use it now
+	scope :published, lambda { where("articles.publish_date IS NOT NULL AND articles.publish_date <= ?", Time.zone.now) }
 
 	validates :title, :content, :user_id, presence: true
 

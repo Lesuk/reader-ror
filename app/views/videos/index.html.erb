@@ -1,0 +1,47 @@
+<% provide(:title, 'All videos') %>
+<h1>All videos</h1>
+<div class="row">
+	<%= render 'shared/sidebar' %>
+
+	<div class="span8">
+		<div class="navbar-inner">
+		<%= form_tag users_path, method: 'get', class: "navbar-search pull-left" do %>
+			<%= text_field_tag :search, params[:search], class: "search-query", placeholder: "Search video..." %>
+		<% end %>
+		<%= link_to 'Add video', new_video_path, {class: "btn", style: "float: right; margin-top: 5px;"}  %>
+		</div>
+
+		<% if @videos.any? %>
+		 
+		    <div id="player-wrapper"></div>
+		 
+		    <% @videos.in_groups_of(3) do |group| %>
+
+		        <% group.each do |video| %>
+		          <% if video %>
+		             <div id="<%= dom_id(video) %>" class="yt_video thumbnail" style="width: 300px; float: left;" >
+		                <%= image_tag "https://img.youtube.com/vi/#{video.uid}/mqdefault.jpg", alt: video.title,
+		                              class: 'yt_preview img-rounded', :"data-uid" => video.uid %>
+		 
+		                <div class="caption">
+		                  <h5><%= video.title %></h5>
+		                  <p>Author: <b><%= video.author %></b></p>
+		                  <p>Duration: <b><%= video.duration %></b></p>
+		                  <p>
+		                    <i class="icon-thumbs-up"></i> <%= video.likes %>
+		                    <i class="icon-thumbs-down"></i> <%= video.dislikes %>
+		                  </p>
+		                  <% if video.user_id %>
+		                  <span>Shared by: <%= link_to video.user.name, user_path(video.user) %></span>
+		                  <% end %>
+		                  | <span><%= link_to "delete", video, method: :delete, remote: true %></span>
+		                </div>
+		            </div>
+		          <% end %>
+		        <% end %>
+		      
+		    <% end %>
+		<% end %>
+		<%= will_paginate %>
+	</div>
+</div>

@@ -11,7 +11,7 @@ class ArticlesController < ApplicationController
 			@articles = Article.by_author(params[:author])
 			@name = "by " + User.find_by_id(params[:author]).name
 		else			
-			@articles = Article.all
+			@articles = Article.includes(:comments).all #published
 		end
 	end
 
@@ -27,7 +27,6 @@ class ArticlesController < ApplicationController
 
 	def create
 		@article = current_user.articles.new(article_params)
-		#@article.user_id = current_user.id
 		if @article.save
 			flash[:success] = "New article has been created."
 			micro_post_content = view_context.link_to(@article.title, @article)

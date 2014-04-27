@@ -1,9 +1,13 @@
 ReaderRor::Application.routes.draw do
+  get "videos/index"
+  get "videos/new"
+  get "videos/create"
   mount Ckeditor::Engine => '/ckeditor'
   resources :users do
     member do
       get :following, :followers
     end
+    resources :tasks
   end
   resources :articles do
     resources :comments
@@ -13,6 +17,7 @@ ReaderRor::Application.routes.draw do
   end
   resources :sessions,      only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
+  resources :videos,        only: [:index, :new, :create, :destroy]
   resources :password_resets
   root 'static_pages#home'
 

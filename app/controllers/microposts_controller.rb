@@ -7,22 +7,23 @@ class MicropostsController < ApplicationController
 		if @micropost.save
 			#respond_to do |format|
 				#format.html { 
-					redirect_to root_url
-					flash[:success] = "Micropost created!" #}
+			redirect_to root_url 
+			flash[:success] = "Micropost created!" 
+				#}
 				#format.js
 			#end
 		else
 			#respond_to do |format|
-				#format.html {
-				@feed_items = [] 
-				render 'static_pages/home' #}
-				#format.js {render 'fail_create.js.erb'}
+				#format.html { 
+			@feed_items = [] 
+			render 'static_pages/home' 
+				#}
+				#format.js { render 'fail_create.js.erb' }
 			#end
 		end
 	end
 
 	def destroy
-		#@micropost.destroy
 		@micropost = Micropost.find_by(id: params[:id])
 		@micropost.destroy
 		respond_to do |format|
