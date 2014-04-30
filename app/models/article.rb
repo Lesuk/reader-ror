@@ -7,6 +7,9 @@ class Article < ActiveRecord::Base
 	has_many :comments, as: :commentable
 	belongs_to :user
 
+	include Tire::Model::Search
+    include Tire::Model::Callbacks
+
 	default_scope -> {order('publish_date DESC')}
 	scope :by_author, -> (user_id) { where user_id: user_id }
 	scope :published, lambda { where("articles.publish_date IS NOT NULL AND articles.publish_date <= ?", Time.zone.now) }
@@ -47,6 +50,14 @@ class Article < ActiveRecord::Base
 	def owned_by?(owner)
 		return false unless owner.is_a?(User)
 		user == owner
+	end
+
+	def self.search(params)
+		tire.search(load: true) do
+			query { string params[:query], default_operator: "AND" } if params[:query].present?
+			filter :range, publish_date: {lte: Time.zone.now}
+			sort { by :publish_date, 'desc' }
+		end
 	end
 
 end

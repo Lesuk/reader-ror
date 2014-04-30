@@ -5,20 +5,50 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.create(name: "Lesuk", email: "lesuk93@yahoo.com", login: "lesuk", password: "19931993", password_confirmation: "19931993", admin: true)
-User.create(name: "Romgerman", email: "romgerman@ukr.net", login: "romgerman", password: "19931993", password_confirmation: "19931993")
-User.create(name: "Josh Acles", email: "romgerm66an@ukr.net", login: "Josh", password: "19931993", password_confirmation: "19931993")
-User.create(name: "Roman Subrichack", email: "romgermn@ukr.net", login: "Subrichack", password: "19931993", password_confirmation: "19931993")
-User.create(name: "Maryana Pukas", email: "romgrman@ukr.net", login: "Maryana", password: "19931993", password_confirmation: "19931993")
-User.create(name: "Alex Mekhovov", email: "romgerma@ukr.net", login: "Mekhovov", password: "19931993", password_confirmation: "19931993")
-User.create(name: "Andrii Furmanets", email: "rmgerma@ukr.net", login: "Furmanets", password: "19931993", password_confirmation: "19931993")
-User.create(name: "Олег Угрин", email: "rmgerma@ukr.net", login: "Олег", password: "19931993", password_confirmation: "19931993")
-User.create(name: "Дмитрий Воронов", email: "romge7rman@ukr.net", login: "voronov", password: "19931993", password_confirmation: "19931993")
+users_list = [
+  [ "Lesuk", "lesuk93@yahoo.com", "lesuk", "19931993", true ],
+  [ "Дмитрo Воронов", "rhmgerm66an@ukr.net", "voronov", "19931993", false ],
+  [ "Олег Угрин", "rmgerma@ukr.net", "oleg", "19931993", false ],
+  [ "Romgerman", "romgerman@ukr.net", "romgerman", "19931993", false ],
+  [ "Roman Subrichack", "romg7ermn@ukr.net", "Subrichack", "19931993", false ],
+  [ "Maryana Pukas", "romg67rman@ukr.net", "Maryana", "19931993", false ],
+  [ "Alex Mekhovov", "romgera@ukr.net", "Mekhovov", "19931993", false ],
+  [ "Andrii Furmanets", "rmgerma@ukr.net", "Furmanets", "19931993", false ],
+  [ "Олег Угрин", "rmgerma@ukr.net", "oleg", "19931993", false ],
+]
+users_list.each do |user|
+  User.create(name: user[0], email: user[1], login: user[2], password: user[3], password_confirmation: user[3], admin: user[4])
+end
 
-Article.create(user_id: 1, title: "Apps Promise Luxury By Eliminating Talking to People", content: "<p>When I power on my phone upon landing at LAX, a text message is already waiting for me: Hi Ian, Silvercar here! We have your res at 1:00pm today. Let's roll! Silvercar rents a fleet of silver Audi A4s at airports in Austin, Dallas, Los Angeles, and San Francisco. A slogan speaks plainly on the company's behalf: car rental that doesnt suck.</p><p>For Silvercar, not sucking means not being like traditional rental car companies. The rest of my on-arrival text message drives the point home. At the end of their detailed instructions, Silvercar urges me: do NOT go to the purple rental cars sign. That's for those who've already given up ;)</p><p>Its not exactly true. Im instructed to take the Lot C bus from the blue Shuttle Airport Connections stop to the first stop after leaving the terminal. This is the stop for off-site rental car shuttles, a fact Silvercar cleverly omits from its instructions. As with the Google bus, the best way for technology companies to make use of public infrastructure is to do so quietly, without acknowledgement.</p><p>The off-site rental car stop sits at the corner of one of LAXs enormous long-term parking lots. It hosts cut-rate rental services without authorization to operate terminal shuttles to collect and deliver passengers. The services youve never heard of, like Midway, Advance, Geo, Atlas, Lucky. These are the agencies for those who have truly given up, so long as "giving up" means not being able to afford the rates at Hertz and Avis, or not having a credit card to guarantee them.</p><p>Silvercar has a smartphone app (an app is what makes your company a tech startup, even when its just an ordinary service business). I was instructed to load it and tap a pick me up button when I had successfully boarded the Lot C bus. Actually, all the button does is compose a text message with an identifying code, which I then sent manually. I receive the kind of faux-eager, informal reply that startups have adopted in response to the impersonality of traditional corporate speech. Awesome! Im on my way! along with a link to track the driver's location via a location sharing service I've never heard of, but apparently ought to know if I fancied myself hip enough to use Silvercar.</p>")
-Article.create(user_id: 3, title: "Knitted Food Photography Looks Good Enough to Eat", content: "Last week, Jared Frank uploaded the ultimate selfie video to YouTube. While on vacation in Peru, Frank decided to take a video of himself in front of a passing train, only to get a swift kick in the head by the conductor. The Internet, in all of its schadenfreudian glory, made the video a viral sensation with more than 27 million views in just one week. Now, it looks like Jared is going to be cashing in big time thanks to the mishap.")
-Article.create(user_id: 2, title: "New York Goes to War Against Airbnb for Disrupting Hotel Business", content: "What had been a relatively civil legal proceeding spilled into the press this week when the rental startup and New York Attorney General Eric Schneiderman met in court on Tuesday. Airbnb has said the attorney general “is determined to fight innovation and attack regular people.” The attorney general's office claims it has worked with numerous other tech companies to stamp out illegal activity, but that Airbnb is being evasive.")
-Article.create(user_id: 3, title: "Give me a quick refresher on Airbnb", content: "Airbnb is an online platform that allows you to list your house or apartment as a rental. Going away for the weekend? Got a spare bedroom for the next few weeks? You can put it on the site, find a person to rent it and pocket some extra cash. Less than six years old, the company is already valued at around $10 billion.")
-Article.create(user_id: 1, title: "And the state of New York has a problem?", content: "Oh yeah. Schneiderman has been working on going after the company for months. Last fall, his office sent Airbnb a legal notice requesting information on about 15,000 hosts who had listings on the site, in an effort to crack down on tax evasion and “illegal hotels.” An individual tenant who leases out an apartment for a weekend might be breaking the law but is probably not the focus of the state’s action. Instead, the state is targeting hosts who have dozens of listings or use Airbnb for illicit activities. Airbnb is not thought to be evading any taxes, but its customers might be. The rental of homes or apartments is subject to local taxes, some of which the attorney general believes are not being paid. Airbnb’s terms of service put the legal responsibility for paying taxes on its hosts. The company has also worked with other cities, namely Portland and San Francisco, to include city taxes in its arrangements.")
-Article.create(user_id: 2, title: "17 Things We Learned From Old Cartoon PSAs", content: "Remember when you willingly got out of bed at 7 a.m. on Saturdays to watch cartoons? Chances are those days are long over. Some of you probably wake up with a mind-numbing hangover, only getting out of bed because you've put off going to the bathroom for the past two hours, and can hold it no longer. But hey, who are we to judge? If you take a trip down memory lane to those early Saturday mornings when G.I. Joe, Duck Tails and Teenage Mutant Ninja Turtles ruled our lives, you may remember some invaluable life lessons brought to you in the form of cartoon PSAs. Weve compiled a list of these animated educational shorts from the '80s and '90s for your nostalgic viewing pleasure. If you don't recall, they really didn't want us to do drugs.")
-Article.create(user_id: 4, title: "20 Twitter Short Stories Written by Mashable Readers", content: "Exiting the bank with a backpack of untraceable currency, Waldo and his dog lost themselves in the crowds. They were never found.")
+new_htc = Article.create! title: "Новий HTC One (The All New One, 2014) на відео ", user_id: 1, publish_date: 1.weeks.ago, content: <<-ARTICLE
+В мережі інтернет з'явилося відео в якому демонструється робота нового ще не анонсованого смартфона HTC - One (The All New One, 2014). За останніми відомостями, пристрій буде представлений в Лондоні 25 березня. В цей же день стартують і його продажі.
+Нагадаємо, HTC One (The All New One, 2014) отримав 5-дюймовий дисплей з роздільною здатністю 1920х1080 пікселів, 4-ядерний процесор Qualcomm Snapdragon 801 з тактовою частотою 1,7 ГГц, 2 Гб оперативної та 16/32 Гб вбудованої пам'яті (передбачено слот для карт MicroSD до 128 Гб), 4-мегапіксельну Ultrapixel основну камеру, стандартний набір радіо модулів і Android 4.4.2 KitKat в якості операційної системи. Габарити: 146х70,5х9,5 мм, вага - 157 г.
+ARTICLE
+
+sssd2 = Article.create! title: "Samsung представила нову лінійку планшетів - Galaxy Tab 4", user_id: 1, publish_date: 1.weeks.ago, content: <<-ARTICLE
+Компанія Samsung офіційно представила нову лінійку планшетів - Galaxy Tab 4. В її склад ввійшли 10,1-, 8- і 7-дюймові девайси з роздільною здатністю дисплеїв 1280х800 пікселів. В продажі, планшети з'являться у поточному кварталі. Ціна - не відома.
+Samsung Galaxy Tab 4 10,1, 8 і 7 отримав 4-ядерний процесор Snapdragon Snapdragon 400 з тактовою частотою 1,2 ГГц, 1,5 Гб оперативної та 16 Гб вбудованої пам'яті, слот для карт MicroSD, 3-мегапіксельну основну і 1,3-мегапіксельну фронтальну камери, стандартний набір радіо модулів та операційну систему Android 4.4 KitKat.
+ARTICLE
+
+ss782 = Article.create! title: "Незабаром стартують продажі 110-дюймового телевізора Samsung ", user_id: 1, publish_date: 1.weeks.ago, content: <<-ARTICLE
+Компанія Samsung офіційно повідомила про старт продаж свого 110-дюймового телевізора. Пристрій отримав роздільну здатність 4K і оцінений в 150 тисяч доларів. Телевізор буде доступний в різних регіонах світу, включаючи Європу.
+Розміри новинки становлять 2,6х1,8 метра. За заявою виробника, девайс оснащений всіма необхідними, для сучасного користувача, функціями.
+ARTICLE
+
+shs = Article.create! title: "Голосовий помічник для ОС WP 8.1 - Microsoft Cortana (відео)", user_id: 2, publish_date: 1.weeks.ago, content: <<-ARTICLE
+Ресурс UnleashThePhones опублікував відео, в якому демонструється робота ще не анонсованого голосового помічника для ОС Windows Phone 8.1 - Microsoft Cortana. 
+На жаль, відео не розкриває всіх можливостей Cortana, а лише показує процес налаштування даного сервісу.
+Очікується, що офіційна презентація Microsoft Cortana відбудеться на початку квітня (Конференція Build).
+ARTICLE
+
+ss22 = Article.create! title: "Grand Theft Auto: San Andreas відтепер доступна і для Windows Phone 8 ", user_id: 2, publish_date: 1.weeks.ago, content: <<-ARTICLE
+Популярна комп'ютерна гра Grand Theft Auto: San Andreas поступово "окуповує" мобільні платформи. Наприкінці минулого місяця була представлена версія для ОС Android, сьогодні, для Windows Phone 8.
+ARTICLE
+
+z27 = Article.create! title: "В деяких регіонах Росії закрили доступ до ВКонтакті", user_id: 2, publish_date: 1.weeks.ago, content: <<-ARTICLE
+На даний момент, в деяких регіонах Росії заблоковано доступ до соціальної мережі ВКонтакті. Раніше інтернет -провайдер Ростелеком посилався на технічний збій, але врешті-решт визнав, що доступ до ресурсу закритий за рішенням суду. Ми, як оператор звязку, були зобовязані це зробити, - розповів представник компанії.
+ARTICLE
+
+Article.create! title: "Upcoming", author: 1, publish_date: 1.weeks.from_now, content: <<-ARTICLE
+This article is set to be published in the future.
+ARTICLE

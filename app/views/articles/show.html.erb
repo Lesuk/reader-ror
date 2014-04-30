@@ -3,7 +3,7 @@
 <%= raw @article.content %>
 
 <p>
-  Publish date: <%= @article.publish_date %>
+  Publish date: <%= @article.publish_date.strftime('%b %d, %Y') %> |
   <%= link_to "Edit Article", edit_article_path(@article) %> |
   <%= link_to 'Delete', @article, data: {confirm: 'Are you sure?'}, method: :delete %> |
   <%= link_to "Back to Articles", articles_path %>

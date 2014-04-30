@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
 	has_secure_password
 	validates :password, length: {minimum: 6}, unless: :password_is_not_being_updated?
 
+	mount_uploader :avatar, AvatarUploader
+
 	def User.new_remember_token
 	  SecureRandom.urlsafe_base64
 	end

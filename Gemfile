@@ -34,6 +34,9 @@ gem 'mini_magick'
 gem 'friendly_id', '~> 5.0.0'
 gem 'babosa'
 gem 'youtube_it', '~> 2.4.0'
+gem 'rmagick'
+gem 'fog'
+gem 'tire'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false
