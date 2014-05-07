@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140430122539) do
+ActiveRecord::Schema.define(version: 20140507164008) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -89,8 +89,10 @@ ActiveRecord::Schema.define(version: 20140430122539) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "to_id"
+    t.integer  "retweet_id"
   end
 
+  add_index "microposts", ["retweet_id"], name: "index_microposts_on_retweet_id"
   add_index "microposts", ["to_id"], name: "index_microposts_on_to_id"
   add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
 

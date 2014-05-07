@@ -14,6 +14,9 @@ ReaderRor::Application.routes.draw do
   end
   resources :microposts, only: [:create, :destroy] do
     resources :comments
+    member do
+      post :retweet
+    end
   end
   resources :sessions,      only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy]

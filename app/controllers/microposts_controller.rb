@@ -32,6 +32,12 @@ class MicropostsController < ApplicationController
 		end
 	end
 
+	def retweet
+		tweet = Micropost.find(params[:id])
+		flash[:notice] = tweet.retweet_by(current_user)
+		redirect_to root_url
+	end
+
 	private
 
 		def micropost_params

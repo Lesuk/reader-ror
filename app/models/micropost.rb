@@ -5,6 +5,7 @@ class Micropost < ActiveRecord::Base
 	validates :content, presence: true, length: {maximum: 140}
 	has_many :comments, as: :commentable
 	has_many :replies, foreign_key: "to_id", class_name: "Micropost"
+	has_many :retweets, class_name: "Micropost", foreign_key: "retweet_id"
 	belongs_to :to, class_name: "User"
 	before_save :check_in_reply_to_scan
 	scope :from_users_followed_by_including_replies, -> (user) { followed_by_including_replies(user) }
@@ -38,6 +39,22 @@ class Micropost < ActiveRecord::Base
 			end
 			content.gsub!(@@reply_to_regexp, '<a href="users/\1">@\1</a>')
 		end
+	end
+
+	def retweet_by(retweeter)
+		if self.user == retweeter
+			"Sorry, you can't retweet your own micropost"
+		elsif self.retweets.where(user_id: retweeter.id).present?
+			"You already retweeted!"
+		else
+			retweeter.microposts.create(content: "RT by #{self.user.name}: #{self.content}", 
+				user_id: retweeter.id, retweet_id: self.id)
+			flash = "Succesfully retweeted!"
+		end
+	end
+
+	def repost_count(post_id)
+		Micropost.where(retweet_id: post_id).count
 	end
 
 end
