@@ -37,6 +37,7 @@ gem 'youtube_it', '~> 2.4.0'
 gem 'rmagick'
 gem 'fog'
 gem 'tire'
+gem 'activerecord-reputation-system', github: 'NARKOZ/activerecord-reputation-system', branch: 'rails4'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

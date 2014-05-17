@@ -11,6 +11,7 @@ ReaderRor::Application.routes.draw do
   end
   resources :articles do
     resources :comments
+    member {post :vote}
   end
   resources :microposts, only: [:create, :destroy] do
     resources :comments

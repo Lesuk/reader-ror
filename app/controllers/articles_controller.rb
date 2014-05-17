@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
 	before_action :signed_in_user, only: [:new, :create, :edit, :update, :destroy]
-	before_action :set_article, only: [:show]
+	before_action :set_article, only: [:show, :vote]
 
 	def index
 		@name = ""
@@ -18,7 +18,11 @@ class ArticlesController < ApplicationController
 	def show
 		@commentable = @article
 		@comments = @commentable.comments
-		#@comment = Comment.new
+		
+		view = Postview.new(article_id: @article.id, guest_ip: request.remote_ip)
+		view.save!
+		@postViews = @article.postviews.count
+		@postUniqueViews = @article.postviews.uniq_by {|i| i.guest_ip }.count
 	end
 
 	def new
@@ -59,6 +63,21 @@ class ArticlesController < ApplicationController
 		redirect_to articles_url
 	end
 
+	def vote
+		thumbs = params[:type]
+		if current_user.voted_for?(@article, thumbs)
+		  vote_reset
+		  redirect_to :back, notice: "Vote reset!"
+		else
+		  value = params[:type] == "up" ? 1 : -1
+		  @article.add_or_update_evaluation(:votes, value, current_user)
+		  redirect_to :back, notice: "Thank you for voting"
+		end
+	end 
+
+	def vote_reset
+		@article.delete_evaluation(:votes, current_user)
+	end
 
 	private
 

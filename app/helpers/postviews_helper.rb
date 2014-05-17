@@ -1,0 +1,2 @@
+module PostviewsHelper
+end

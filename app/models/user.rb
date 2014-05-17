@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 	has_many :videos
 	has_many :tasks
 	has_many :comments, dependent: :destroy
+	has_many :evaluations, class_name: "ReputationSystem::Evaluation", as: :source
 	before_save {self.email = email.downcase}
 	before_create :create_remember_token
 	validates :name, presence: true, length: {maximum: 30}
@@ -74,6 +75,15 @@ class User < ActiveRecord::Base
 
 	def to_param
 		login
+	end
+
+	def voted_for?(article, direction)
+		eval = evaluations.where(target_type: article.class, target_id: article.id).first
+		if direction == 'up'
+		  eval.present? && eval.value > 0 ? true : false
+		else
+		  eval.present? && eval.value < 0 ? true : false 
+		end
 	end
 
   	private

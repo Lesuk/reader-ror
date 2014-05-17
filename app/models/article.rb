@@ -5,6 +5,8 @@ class Article < ActiveRecord::Base
 	has_many :categorizes
 	has_many :categories, through: :categorizes
 	has_many :comments, as: :commentable
+	has_many :postviews
+	has_reputation :votes, source: :user, aggregated_by: :sum
 	belongs_to :user
 
 	include Tire::Model::Search
