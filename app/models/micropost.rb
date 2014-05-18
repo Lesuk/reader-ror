@@ -10,6 +10,8 @@ class Micropost < ActiveRecord::Base
 	before_save :check_in_reply_to_scan
 	scope :from_users_followed_by_including_replies, -> (user) { followed_by_including_replies(user) }
 
+	mount_uploader :mpost_picrute, MPicruteUploader
+
 	@@reply_to_regexp = /@([A-Za-z0-9_]{1,15})/ #/\A@([^\s]*)/
 
 	# Повертає мікропости від користувачів, за якими стежить даний користувач
@@ -47,8 +49,9 @@ class Micropost < ActiveRecord::Base
 		elsif self.retweets.where(user_id: retweeter.id).present?
 			"You already retweeted!"
 		else
-			retweeter.microposts.create(content: "RT by #{self.user.name}: #{self.content}", 
-				user_id: retweeter.id, retweet_id: self.id)
+			retweeter.microposts.create(content: self.content, user_id: retweeter.id, 
+				retweet_id: self.id, repost_author: self.user_id, mtitle: self.mtitle, 
+				mpost_picrute: self.mpost_picrute)
 			flash = "Succesfully retweeted!"
 		end
 	end

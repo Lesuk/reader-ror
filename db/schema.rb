@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140517170911) do
+ActiveRecord::Schema.define(version: 20140517234032) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20140517170911) do
     t.datetime "updated_at"
     t.string   "slug"
     t.string   "status",       default: "published"
+    t.string   "thumbnail"
   end
 
   add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true
@@ -90,6 +91,9 @@ ActiveRecord::Schema.define(version: 20140517170911) do
     t.datetime "updated_at"
     t.integer  "to_id"
     t.integer  "retweet_id"
+    t.string   "mpost_picrute"
+    t.integer  "repost_author"
+    t.string   "mtitle"
   end
 
   add_index "microposts", ["retweet_id"], name: "index_microposts_on_retweet_id"

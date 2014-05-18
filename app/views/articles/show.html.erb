@@ -1,5 +1,7 @@
 <h1><%= @article.title %></h1>
 
+<%= image_tag @article.thumbnail_url(:thumb) if @article.thumbnail? %>
+
 <%= raw @article.content %>
 <div>
 	<%= pluralize @article.reputation_for(:votes).to_i, "vote" %>

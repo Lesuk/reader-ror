@@ -4,6 +4,9 @@
 	<div class="field">
 		<%= f.text_area :content, id: "word-counter-2", placeholder: "Compose new micropost..." %>
 	</div>
+	<div class="field">
+		<%= f.file_field :mpost_picrute %>
+	</div>
 	<%= f.submit "Post", class: "btn btn-large btn-primary" %>
 <% end %>
 <% end %>

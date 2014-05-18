@@ -9,6 +9,8 @@ class Article < ActiveRecord::Base
 	has_reputation :votes, source: :user, aggregated_by: :sum
 	belongs_to :user
 
+	mount_uploader :thumbnail, ThumbnailUploader
+
 	include Tire::Model::Search
     include Tire::Model::Callbacks
 
