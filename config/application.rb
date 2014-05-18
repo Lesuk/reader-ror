@@ -30,8 +30,9 @@ module ReaderRor
 
     config.action_mailer.default_url_options = { host: 'ua-reader.herokuapp.com' }
 
-    config.assets.precompile += Ckeditor.assets
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
+    config.assets.precompile += Ckeditor.assets
+    config.assets.precompile += ['ckeditor/*']
 
     #config.time_zone = 'Ukraine'
     #config.active_record.default_timezone = 'Ukraine'
