@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 	has_many :replies, foreign_key: "to_id", class_name: "Micropost"
 	has_many :videos
 	has_many :tasks
+	has_many :messages
 	has_many :comments, dependent: :destroy
 	has_many :evaluations, class_name: "ReputationSystem::Evaluation", as: :source
 	before_save {self.email = email.downcase}

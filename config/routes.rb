@@ -1,7 +1,4 @@
 ReaderRor::Application.routes.draw do
-  get "videos/index"
-  get "videos/new"
-  get "videos/create"
   mount Ckeditor::Engine => '/ckeditor'
   resources :users do
     member do
@@ -23,6 +20,7 @@ ReaderRor::Application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   resources :videos,        only: [:index, :new, :create, :destroy]
   resources :password_resets
+  resources :messages
   root 'static_pages#home'
 
   match '/signup', to: 'users#new', via: 'get'

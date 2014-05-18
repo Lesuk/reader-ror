@@ -1,0 +1,41 @@
+<% provide(:title, 'Messages') %>
+<div class="row">
+	<%= render 'shared/sidebar' %>
+
+	<div class="span8">
+		<% if current_user %>
+			<%= link_to "New message", new_message_path %>
+		    <div id="inboxMessages">
+		    <h2>Inbox</h2>
+		    <table class="table">
+		      <tr>
+		        <td>Subject</td>
+		        <td>From</td>
+		        <td>Date</td>
+		        <td></td>
+		      </tr>
+		    </table>
+		    <div id="messages">
+		      <%= render @messages %> 
+		    </div>
+		  </div>
+
+		  <div id="sentMessages">
+		    <h2>Sent Messages</h2>
+		    <table class="table">
+		      <tr>
+		        <td>Subject</td>
+		        <td>To</td>
+		        <td>Date</td>
+		        <td></td>
+		      </tr>
+		    </table>
+		    <div id="messages">
+		      <%= render 'messages/sent' %> 
+		    </div>
+		  </div>
+		<% else %>
+		    <% flash[:error] = "Unauthorized - The page is not available." %>
+		<%end%>
+	</div>
+</div>
